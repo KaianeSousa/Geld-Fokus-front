@@ -1,0 +1,24 @@
+<div class="carousel-container">
+  <div #swiperContainer class="swiper news-carousel">
+    <div class="swiper-wrapper">
+      <ng-container *ngFor="let news of newsItems; let i = index">
+        <div class="swiper-slide">
+          <div class="carousel-item">
+            <ng-container *ngTemplateOutlet="newsCardTemplate; context: { $implicit: news }"></ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+
+<a href="#" class="show-more-link">Mostrar mais notícias</a>
+
+<ng-template #newsCardTemplate let-news>
+  <img [src]="news.img" alt="Notícia">
+  <div class="p-4">
+    <p>{{ news.description }}</p>
+  </div>
+</ng-template>

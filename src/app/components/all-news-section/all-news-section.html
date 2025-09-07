@@ -1,0 +1,35 @@
+<section class="all-news-section">
+  <h2 class="section-title">Todas as notícias</h2>
+  
+  <div class="tabs">
+    <button 
+      class="tab-button"
+      [class.active]="activeTab === 'recent'"
+      (click)="setActiveTab('recent')">
+      Recentes
+    </button>
+    <button 
+      class="tab-button"
+      [class.active]="activeTab === 'popular'"
+      (click)="setActiveTab('popular')">
+      Mais lidas
+    </button>
+  </div>
+
+  <div class="news-list">
+    <article class="news-item" *ngFor="let news of allNews">
+      <img [src]="news.img" 
+           [alt]="news.title" 
+           class="news-item-img">
+      <div class="news-item-content">
+        <h4>{{ news.title }}</h4>
+        <p>{{ news.description }}</p>
+          <div class="news-meta">
+            <span>{{ news.source }}</span>
+            <span class="dot">•</span>
+            <span>{{ news.time }}</span>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

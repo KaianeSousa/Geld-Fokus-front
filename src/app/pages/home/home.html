@@ -1,0 +1,12 @@
+<div class="home-grid">
+  <div class="main-content">
+    <app-latest-news-section></app-latest-news-section>
+    <app-news-carousel></app-news-carousel>
+    <app-all-news-section [allNews]="allNews"></app-all-news-section>
+  </div>
+  <aside class="sidebar">
+    <app-stock-widget title="Ações" [stocks]="acoes"></app-stock-widget>
+    <app-stock-widget title="Ações mais baratas" [stocks]="acoesBaratas"></app-stock-widget>
+    <app-stock-widget title="Ações em Destaque" [stocks]="acoesDestaque"></app-stock-widget>
+  </aside>
+</div>
