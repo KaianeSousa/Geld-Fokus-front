@@ -21,6 +21,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "public"
@@ -29,15 +30,7 @@
             "styles": [
               "src/styles.scss",
               "node_modules/swiper/swiper-bundle.min.css"
-            ],
-            "polyfills": [
-              "zone.js"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {
@@ -86,6 +79,10 @@
             "assets": [
               {
                 "glob": "**/*",
+                "input": "src/assets"
+              },
+              {
+                "glob": "**/*",
                 "input": "public"
               }
             ],
@@ -107,7 +104,6 @@
     }
   },
   "cli": {
-    "analytics": "771c71d5-78fb-4045-899a-9bf2b7d7b6b0",
     "schematicCollections": [
       "angular-eslint"
     ]

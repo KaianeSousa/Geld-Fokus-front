@@ -1,3 +1,5 @@
+/* You can add global styles to this file, and also import other style files */
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 * {
@@ -8,10 +10,12 @@
 
 :root {
   --bg-primary-color: #ffffff;
+  --primary-accent-color: #090963;
   --bg-secondary-color: #0d253f;
   --accent-color: #90cea1;
   --text-color: #333;
   --text-light-gray: #6c757d;
+  --text-light: #e1dddd;
   --border-color: #e0e0e0;
 }
 

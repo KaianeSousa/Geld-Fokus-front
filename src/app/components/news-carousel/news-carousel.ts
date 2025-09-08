@@ -16,13 +16,13 @@ export class NewsCarouselComponent implements AfterViewInit {
   @ViewChild('swiperContainer', { static: false }) swiperContainer!: ElementRef;
 
   newsItems = [
-    { img: 'app/assets/images/logo.png', description: 'Mercados se preparam para volatilidade em meio às manobras...' },
-    { img: 'app/assets/images/logo.png', description: 'O mundo é um lugar perigoso...' },
-    { img: 'https://via.placeholder.com/200x120.png/cccccc/000000?text=News+3', description: 'Notícia 3...' },
-    { img: 'https://via.placeholder.com/200x120.png/cccccc/000000?text=News+4', description: 'Notícia 4...' },
-    { img: 'https://via.placeholder.com/200x120.png/cccccc/000000?text=News+5', description: 'Notícia 5...' },
-    { img: 'https://via.placeholder.com/200x120.png/cccccc/000000?text=News+6', description: 'Notícia 6...' },
-    { img: 'https://via.placeholder.com/200x120.png/cccccc/000000?text=News+7', description: 'Notícia 7...' },
+    { img: 'https://placehold.co/200x120?text=News+1', description: 'Mercados se preparam para volatilidade em meio às manobras...' },
+    { img: 'https://placehold.co/200x120?text=News+2', description: 'O mundo é um lugar perigoso...' },
+    { img: 'https://placehold.co/200x120?text=News+3', description: 'Notícia 3...' },
+    { img: 'https://placehold.co/200x120?text=News+4', description: 'Notícia 4...' },
+    { img: 'https://placehold.co/200x120?text=News+5', description: 'Notícia 5...' },
+    { img: 'https://placehold.co/200x120?text=News+6', description: 'Notícia 6...' },
+    { img: 'https://placehold.co/200x120?text=News+7', description: 'Notícia 7...' },
   ];
 
   ngAfterViewInit() {

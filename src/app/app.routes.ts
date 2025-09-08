@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home';
 import { NewsDetails } from './pages/news-details/news-details';
 
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    loadComponent: () =>
+      import('./pages/home/home').then(m => m.HomeComponent),
     title: 'Geld Fokus - Home'
   },
   {
@@ -16,6 +16,5 @@ export const routes: Routes = [
   {
     path: '**',
     redirectTo: '',
-    pathMatch: 'full'
   }
 ];

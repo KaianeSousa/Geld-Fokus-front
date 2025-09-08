@@ -21,28 +21,28 @@ import { NewsCarouselComponent } from "../../components/news-carousel/news-carou
 export class HomeComponent {
   allNews = [
     {
-      img: 'https://via.placeholder.com/150x100.png/0d253f/ffffff?text=Notícia',
+      img: 'https://placehold.co/150x100?text=Notícia',
       title: 'Mercados se preparam para volatilidade em meio às manobras de Trump no Fed',
       source: 'Por Saiba Todas',
       time: '28 minutos atrás',
       description: 'Os mercados financeiros podem enfrentar outro surto de volatilidade esta...'
     },
     {
-      img: 'https://via.placeholder.com/150x100.png/0d253f/ffffff?text=Balança',
+      img: 'https://placehold.co/150x100?text=Balança',
       title: 'Balança comercial brasileira tem superávit de US$4,132 bi em agosto, diz ministério',
       source: 'Por Saiba Todas',
       time: '28 minutos atrás',
       description: 'Conforme pesquisa da Reuters com economistas, que se referia aos dados de julho (Reuters)...'
     },
     {
-      img: 'https://via.placeholder.com/150x100.png/0d253f/ffffff?text=Balança',
+      img: 'https://placehold.co/150x100?text=Balança',
       title: 'Balança comercial brasileira tem superávit de US$4,132 bi em agosto, diz ministério',
       source: 'Por Saiba Todas',
       time: '58 minutos atrás',
       description: 'Conforme pesquisa da Reuters com economistas, que se referia aos dados de julho (Reuters)...'
     },
     {
-      img: 'https://via.placeholder.com/150x100.png/0d253f/ffffff?text=Balança',
+      img: 'https://placehold.co/150x100?text=Balança',
       title: 'Balança comercial brasileira tem superávit de US$4,132 bi em agosto, diz ministério',
       source: 'Por Saiba Todas',
       time: '58 minutos atrás',

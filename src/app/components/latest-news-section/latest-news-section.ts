@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import Swiper from 'swiper';
 import { Navigation } from 'swiper/modules';
 
@@ -8,7 +8,7 @@ Swiper.use([Navigation]);
 @Component({
   selector: 'app-latest-news-section',
   standalone: true,
-  imports: [CommonModule],
+    imports: [CommonModule, NgOptimizedImage],
   templateUrl: './latest-news-section.html',
   styleUrls: ['./latest-news-section.scss']
 })
