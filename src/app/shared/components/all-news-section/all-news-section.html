@@ -1,0 +1,45 @@
+<section class="all-news-section">
+  <app-title-section content="Todas as notícias"></app-title-section>
+
+   <div class="tabs" #tabsContainer>
+      <button
+         class="tab-button"
+         [class.active]="activeTab === 'recent'"
+         (click)="setActiveTab('recent', $event)">
+         Recentes
+      </button>
+      <button
+         class="tab-button"
+         [class.active]="activeTab === 'popular'"
+         (click)="setActiveTab('popular', $event)">
+         Mais lidas
+      </button>
+
+      <div class="active-tab-indicator" #activeIndicator></div>
+   </div>
+
+   <div class="news-list">
+      @for (news of activeTab === 'recent' ? recentNews : popularNews; track news.id) {
+         <article class="news-item">
+            <img [ngSrc]="news.coverImage"
+                 [alt]="news.title"
+                 width="100"
+                 height="100"
+                 class="news-item-img">
+            <div class="news-item-content">
+               <h4>
+                  <a href="/news/{{ news.slug }}" class="featured-news-link">
+                     {{ news.title }}
+                  </a>
+               </h4>
+               <p>{{ news.content }}</p>
+               <div class="news-meta">
+                  <span>{{ news.slug }}</span>
+                  <span class="dot">•</span>
+                  <span>{{ news.createdAt }}</span>
+               </div>
+            </div>
+         </article>
+      }
+   </div>
+</section>
