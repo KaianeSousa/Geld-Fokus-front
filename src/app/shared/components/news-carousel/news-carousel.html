@@ -1,0 +1,29 @@
+@if(newsState$ | async; as state) {
+   @if(state.loading) {
+      <div class="loading-container">
+         <div class="spinner"></div>
+         <p>Carregando Notícias...</p>
+      </div>
+   } @else if(state.news && state.news.length > 0) {
+      <div class="carousel-container">
+         <swiper-container #swiperContainer init="false">
+            @for (news of state.news; track news.id) {
+               <swiper-slide>
+                  <app-news-card [news]="news"></app-news-card>
+               </swiper-slide>
+            }
+         </swiper-container>
+
+         <div class="swiper-button-prev"></div>
+         <div class="swiper-button-next"></div>
+
+         <div class="swiper-pagination"></div>
+
+         <a routerLink="/news" class="show-more-link">Mostrar mais notícias</a>
+      </div>
+   } @else {
+      <div class="error-container">
+         <p>Nenhuma notícia encontrada no momento.</p>
+      </div>
+   }
+}
