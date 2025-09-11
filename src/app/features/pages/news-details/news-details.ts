@@ -1,11 +1,11 @@
 // news-details.ts (continuação)
-import { catchError, map, Observable, of, startWith, switchMap } from 'rxjs';
+import {Observable } from 'rxjs';
 import { Article } from '../../../core/@types/Article';
 import {AsyncPipe, DatePipe, NgOptimizedImage} from '@angular/common';
 import { TitleSectionComponent } from '../../../shared/components/title-section/title-section.component';
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {NewsService} from '../../../core/services/news.service';
+import {ArticleService} from '../../../core/services/article.service';
 
 @Component({
    selector: 'app-news-details',
@@ -18,9 +18,9 @@ import {NewsService} from '../../../core/services/news.service';
    templateUrl: './news-details.html',
    styleUrl: './news-details.scss'
 })
-export class NewsDetails implements OnInit {
+export class NewsDetails {
    private route = inject(ActivatedRoute);
-   private newsService = inject(NewsService);
+   private articleService = inject(ArticleService);
 
    newsState$!: Observable<{
       loading: boolean;
@@ -28,7 +28,7 @@ export class NewsDetails implements OnInit {
       error: Error | null;
    }>;
 
-   ngOnInit(): void {
+  /* ngOnInit(): void {
       this.newsState$ = this.route.paramMap.pipe(
          switchMap(params => {
             const slug = params.get('slug');
@@ -36,12 +36,12 @@ export class NewsDetails implements OnInit {
                return of({ loading: false, news: null, error: 'Notícia não encontrada' });
             }
 
-            return this.newsService.getNewsBySlug(slug).pipe(
+            return this.articleService.getNewsBySlug(slug).pipe(
                map(newsData => ({ loading: false, news: newsData ?? null, error: null })),
                catchError(err => of({ loading: false, news: null, error: err }))
             );
          }),
          startWith({ loading: true, news: null, error: null })
       );
-   }
+   } */
 }

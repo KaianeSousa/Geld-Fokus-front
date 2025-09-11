@@ -5,7 +5,7 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./features/pages/home/home').then(m => m.HomeComponent),
+      import('./features/pages/home/home.page').then(m => m.HomePage),
     title: 'Geld Fokus - Home'
   },
   {
