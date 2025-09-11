@@ -7,9 +7,9 @@ import {NgOptimizedImage} from "@angular/common";
         NgOptimizedImage
     ],
   standalone: true,
-  templateUrl: './navbar.html',
-  styleUrl: './navbar.scss'
+  templateUrl: './navbar.component.html',
+  styleUrl: './navbar.component.scss'
 })
-export class Navbar {
+export class NavbarComponent {
 
 }

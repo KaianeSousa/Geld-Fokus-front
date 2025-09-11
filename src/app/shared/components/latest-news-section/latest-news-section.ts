@@ -5,7 +5,7 @@ import {Navigation} from 'swiper/modules';
 import {TitleSectionComponent} from '../title-section/title-section.component';
 import {Article} from '../../../core/@types/Article';
 import {catchError, map, Observable, of, startWith} from 'rxjs';
-import {NewsService} from '../../../core/services/news.service';
+import {ArticleService} from '../../../core/services/article.service';
 
 Swiper.use([Navigation]);
 
@@ -17,21 +17,24 @@ Swiper.use([Navigation]);
    styleUrls: ['./latest-news-section.scss']
 })
 export class LatestNewsSectionComponent implements OnInit {
-   private newsService = inject(NewsService);
-   newsState$!: Observable<{
-      loading: boolean;
-      news: Article | null;
-   }>;
+   private articleService = inject(ArticleService);
+   newsState$!: Observable<{ loading: boolean; news: Article[] | null }>;
+
 
    ngOnInit() {
-      this.getLatestNews();
+      this.getNews();
    }
 
-   getLatestNews() {
-      this.newsState$ = this.newsService.getLatestNews().pipe(
-         map(newsData => ({ loading: false, news: newsData })),
-         startWith({ loading: true, news: null }),
-         catchError(() => of({ loading: false, news: null }))
-      );
+   getNews(page = 0, size = 10): void {
+      this.newsState$ = this.articleService
+        .getPublishedArticles(page, size)
+        .pipe(
+          map(pageData => ({
+            loading: false,
+            news: pageData.content, 
+          })),
+          startWith({ loading: true, news: null }),
+          catchError(() => of({ loading: false, news: null }))
+        );
     }
 }

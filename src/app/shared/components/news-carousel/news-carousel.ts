@@ -11,87 +11,77 @@ import {
 import {isPlatformBrowser, CommonModule} from '@angular/common';
 import {catchError, map, Observable, of, startWith} from 'rxjs';
 import {Article} from '../../../core/@types/Article';
-import {NewsService} from '../../../core/services/news.service';
+import {ArticleService} from '../../../core/services/article.service';
 import {register, SwiperContainer} from 'swiper/element/bundle';
 import {SwiperOptions} from 'swiper/types';
 import {NewsCardComponent} from '../news-card/news-card.component';
 import {RouterLink} from '@angular/router';
 
 register();
-
 @Component({
    selector: 'app-news-carousel',
+   standalone: true,
    imports: [CommonModule, NewsCardComponent, RouterLink],
    schemas: [CUSTOM_ELEMENTS_SCHEMA],
    templateUrl: './news-carousel.html',
    styleUrls: ['./news-carousel.scss']
-})
-export class NewsCarouselComponent implements OnInit, OnDestroy {
-   private newsService = inject(NewsService);
+ })
+ export class NewsCarouselComponent implements OnInit, OnDestroy {
+   private articleService = inject(ArticleService);
    private readonly platformId = inject(PLATFORM_ID);
-
-   newsState$!: Observable<{
-      loading: boolean;
-      news: Article[] | null;
-   }>;
-
+ 
+   newsState$!: Observable<{ loading: boolean; news: Article[] | null }>;
+ 
+   @ViewChild('swiperContainer')
+   set swiperContainer(el: ElementRef<SwiperContainer> | undefined) {
+     if (el) {
+       this.swiperContainerEl = el;
+       this.initializeSwiper();
+     }
+   }
+ 
    private swiperContainerEl?: ElementRef<SwiperContainer>;
-
-   @ViewChild('swiperContainer') set swiperContainer(el: ElementRef<SwiperContainer>) {
-      if (el) {
-         this.swiperContainerEl = el;
-         this.initializeSwiper();
-      }
+ 
+   ngOnInit(): void {
+     this.getNews();
    }
-
-   ngOnInit() {
-      this.getNews();
-   }
-
+ 
    ngOnDestroy(): void {
-      this.swiperContainerEl?.nativeElement?.swiper?.destroy(true, true);
+     const swiperInstance = this.swiperContainerEl?.nativeElement.swiper;
+     swiperInstance?.destroy(true, true);
    }
-
-   getNews() {
-      this.newsState$ = this.newsService.getAllNews().pipe(
-         map(newsData => ({loading: false, news: newsData})),
-         startWith({loading: true, news: null}),
-         catchError(() => of({loading: false, news: null}))
-      );
+ 
+   getNews(page = 0, size = 10): void {
+     this.newsState$ = this.articleService
+       .getPublishedArticles(page, size)
+       .pipe(
+         map(pageData => ({
+           loading: false,
+           news: pageData.content, 
+         })),
+         startWith({ loading: true, news: null }),
+         catchError(() => of({ loading: false, news: null }))
+       );
    }
-
-   initializeSwiper(): void {
-      if (!isPlatformBrowser(this.platformId) || !this.swiperContainerEl?.nativeElement) {
-         return;
-      }
-
-      const swiperEl = this.swiperContainerEl.nativeElement;
-      if (swiperEl.swiper) return;
-
-      const swiperOptions = {
-         slidesPerView: 5,
-         spaceBetween: 20,
-         loop: true,
-         navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-         },
-         pagination: false,
-         // breakpoints: {
-         //    320: {slidesPerView: 1, spaceBetween: 10,},
-         //    480: {
-         //       slidesPerView: 2, spaceBetween: 15, pagination: {
-         //          el: '.swiper-pagination',
-         //          clickable: true,
-         //       },
-         //       navigation: false,
-         //    },
-         //    768: {slidesPerView: 3, spaceBetween: 20},
-         //    1024: {slidesPerView: 5, spaceBetween: 20},
-         // },
-      } as SwiperOptions;
-
-      Object.assign(swiperEl, swiperOptions);
-      swiperEl.initialize();
+ 
+   private initializeSwiper(): void {
+     if (!isPlatformBrowser(this.platformId) || !this.swiperContainerEl) return;
+ 
+     const swiperEl = this.swiperContainerEl.nativeElement;
+     if (swiperEl.swiper) return;
+ 
+     const swiperOptions: SwiperOptions = {
+       slidesPerView: 5,
+       spaceBetween: 20,
+       loop: true,
+       navigation: {
+         nextEl: '.swiper-button-next',
+         prevEl: '.swiper-button-prev',
+       },
+     };
+ 
+     Object.assign(swiperEl, swiperOptions);
+     swiperEl.initialize();
    }
-}
+ }
+ 
