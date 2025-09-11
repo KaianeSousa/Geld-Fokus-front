@@ -1,0 +1,42 @@
+@if (newsState$ | async; as state) {
+   @if (state.loading) {
+      <div class="loading-container">
+         <div class="spinner"></div>
+         <p>Carregando Notícia...</p>
+      </div>
+   } @else if (state.error) {
+      <div class="error-container">
+         <h2>Ocorreu um erro</h2>
+         <p>{{ state.error.message || 'Não foi possível carregar a notícia.' }}</p>
+      </div>
+   } @else if (state.news) {
+         <div class="details-container">
+            <app-title-section [font]="{'font-size': '2.5rem'}" [content]="state.news.title"></app-title-section>
+
+            <p class="news-subtitle">{{ state.news.subtitle }}</p>
+            <div class="tag-container">
+               @for (tag of state.news.tags; track tag) {
+                  <span class="news-tag"> | {{ tag.name }}</span>
+               }
+            </div>
+
+            <p class="news-published-date">Publicado em {{ state.news.publishedDate | date:'dd/MM/yyyy HH:mm' }} | Atualizado em {{ state.news.updatedAt | date:'dd/MM/yyyy HH:mm' }}</p>
+            <div class="spacer"></div>
+
+            <div class="news-content">
+               <img class="cover-image" [ngSrc]="state.news.coverImage" [alt]="state.news.title" width="100" height="100">
+
+               <p class="news-author">Por {{ state.news.author.name }}</p>
+
+               <article class="news-body">
+                  {{ state.news.content }}
+               </article>
+            </div>
+         </div>
+      } @else {
+      <div class="error-container">
+         <h2>Notícia não encontrada</h2>
+         <p>O link que você seguiu pode estar quebrado ou a notícia foi removida.</p>
+      </div>
+   }
+}
