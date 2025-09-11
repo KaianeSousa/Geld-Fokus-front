@@ -1,0 +1,34 @@
+@if(newsState$ | async; as state) {
+   @if(state.loading) {
+      <div class="loading-container">
+         <div class="spinner"></div>
+         <p>Carregando Notícia...</p>
+      </div>
+   } @else if(state.news) {
+
+      <section class="latest-news-section">
+         <app-title-section content="Últimas Notícias"></app-title-section>
+
+         <div class="featured-news">
+            <div class="featured-image">
+               <img ngSrc="https://placehold.co/400x250?text=Destaque"
+                    width="400"
+                    height="250"
+                    alt="Notícia Destaque"
+                    priority
+               >
+            </div>
+            <div class="featured-content">
+               <h3>
+                  <a href="/news/{{ state.news.slug }}" class="featured-news-link">
+                     {{ state.news.title }}
+                  </a>
+               </h3>
+               <p>
+               {{ state.news.content }}
+               </p>
+            </div>
+         </div>
+      </section>
+   }
+}

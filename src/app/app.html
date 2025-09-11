@@ -1,5 +1,15 @@
 <app-navbar></app-navbar>
-<main class="main-container">
-  <router-outlet></router-outlet>
-</main>
+
+<div class="site-layout">
+
+   <main class="main-content">
+      <router-outlet></router-outlet>
+   </main>
+
+   <aside class="sidebar-content">
+      <app-stocks-sidebar></app-stocks-sidebar>
+   </aside>
+
+</div>
+
 <app-footer></app-footer>

@@ -1,0 +1,8 @@
+<a [routerLink]="['/news', news.slug]" class="news-card">
+   <div class="news-card__image-container">
+      <img [ngSrc]="news.coverImage" [alt]="news.title" class="news-card__image" width="300" height="150">
+   </div>
+   <div class="news-card__content">
+      <h3 class="news-card__title">{{ news.title }}</h3>
+   </div>
+</a>

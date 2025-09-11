@@ -1,0 +1,64 @@
+.app-navbar {
+  display: flex;
+  padding: 1rem 2rem;
+  background-color: var(--bg-secondary-color);
+  border-bottom: 1px solid var(--border-color);
+  width: 100%;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  &__logo img {
+    height: 30px;
+    width: auto;
+    display: block;
+  }
+
+  .login-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    font-weight: 500;
+    color: var(--text-light);
+    background-color: transparent;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+    &:hover, &:focus-visible {
+      color: var(--text-light-gray);
+      outline: none;
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 2px var(--primary-accent-color);
+    }
+  }
+
+  .arrow-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .login-button:hover .arrow-icon {
+    transform: translateX(4px);
+  }
+}
+
+@media (max-width: 768px) {
+  .app-navbar {
+    padding: 1rem;
+
+    &__content {
+    }
+  }
+}
