@@ -1,0 +1,24 @@
+<div class="main-content">
+   <app-latest-news-section></app-latest-news-section>
+   <div class="spacer"></div>
+   <app-news-carousel></app-news-carousel>
+   <div class="spacer"></div>
+   @if (combinedState$ | async; as state) {
+
+      @if (state.loading) {
+         <div class="loading-container">
+            <div class="spinner"></div>
+            <p>Carregando Notícias...</p>
+         </div>
+      } @else if (state.recent && state.popular) {
+         <app-all-news-section
+            [popularNews]="state.popular"
+            [recentNews]="state.recent"
+         ></app-all-news-section>
+      }
+   }
+</div>
+
+
+
+
