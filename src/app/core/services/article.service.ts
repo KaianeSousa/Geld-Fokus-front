@@ -13,8 +13,8 @@ export class ArticleService {
    private readonly endpoint = 'http://localhost:8080/articles'
     private http = inject(HttpClient);
 
-    createArticle(dto: CreateArticle): Observable<Article> {
-      return this.http.post<Article>(`${this.endpoint}/create-article`, dto);
+    createArticle(formData: FormData): Observable<Article> {
+      return this.http.post<Article>(`${this.endpoint}/create-article`, formData);
     }
   
     updateArticle(id: string, dto: CreateArticle): Observable<Article> {

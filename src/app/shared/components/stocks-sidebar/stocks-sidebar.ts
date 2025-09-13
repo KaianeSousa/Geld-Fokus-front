@@ -29,6 +29,5 @@ export class StocksSidebar {
       {symbol: 'EMBR3', value: '21,08', change: '+3.24%', positive: true},
       {symbol: 'AZUL4', value: '13,10', change: '-1.50%', positive: false},
       {symbol: 'GOLL4', value: '7,79', change: '+2.50%', positive: true}
-   ];
-
+   ]; 
 }
