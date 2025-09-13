@@ -1,0 +1,90 @@
+<div class="register-page">
+    <main class="register-content">
+      <div class="register-content__header">
+        <h1 class="title">Publicar artigo</h1>
+        <p class="subtitle">
+          Prezado(a) jornalista, reforçamos a importância de verificar sempre a veracidade das informações antes de publicar.
+        </p>
+      </div>
+  
+      <form class="register-form" #registerForm="ngForm" (ngSubmit)="onSubmit()">
+  
+        <div class="input-group">
+          <label for="title">Título</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            class="input-group__input"
+            placeholder="Escreva o título do artigo"
+            [(ngModel)]="register.title"
+            required
+          />
+        </div>
+  
+        <div class="input-group">
+          <label for="subtitle">Subtítulo</label>
+          <input
+            type="text"
+            id="subtitle"
+            name="subtitle"
+            class="input-group__input"
+            placeholder="Escreva o subtítulo do artigo"
+            [(ngModel)]="register.subtitle"
+            required
+          />
+        </div>
+  
+        <div class="input-group">
+          <label for="content">Descrição da notícia</label>
+          <textarea
+            id="content"
+            name="content"
+            class="input-group__textarea"
+            rows="10"
+            placeholder="Descreva aqui sua notícia"
+            [(ngModel)]="register.content"
+            required
+          ></textarea>
+        </div>
+  
+        <div class="input-group upload-group">
+          <label for="coverImage">Upload de imagens</label>
+          <div class="upload-container" 
+          (click)="fileInput.click()"
+          (keyword.enter)="fileInput.click()"
+          tabindex="0"
+          role="button"
+          >
+            <span class="file-name">{{ selectedFile ? selectedFile.name : 'Nenhum arquivo selecionado' }}</span>
+            <button type="button" (click)="fileInput.click()">Selecionar Imagem</button>
+            <input
+              type="file"
+              #fileInput
+              hidden
+              (change)="onFileSelected($event)"
+            />
+          </div>
+        </div>
+  
+        <div class="input-group">
+          <label for="tags">Tags</label>
+          <ng-select
+            bindLabel="name"
+            bindValue="name"
+            [(ngModel)]="register.tagNames"
+            name="tags"
+            [multiple]="true"
+            placeholder="Selecione as tags"
+            [loading]="(newsState$ | async)?.loading"
+            class="select-tags"
+          ></ng-select>
+        </div>
+  
+        <button type="submit" class="btn btn--primary">
+          Publicar artigo
+        </button>
+      </form>
+    </main>
+  </div>
+  
