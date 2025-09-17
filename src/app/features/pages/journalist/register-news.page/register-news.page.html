@@ -104,7 +104,7 @@
         </div>
         <input type="hidden" name="tags"   [ngModel]="register.tagNames.join(',')" required />
         
-        @if (registerForm.controls['tags'].touched && registerForm.controls['tags']?.invalid) {
+        @if (registerForm.controls['tags'].touched && registerForm.controls['tags'].invalid) {
           <span class="error">Tags são obrigatórias.</span>
         }
       </div>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewsDetails } from './news-details';
+import { DefaultLayout } from './default-layout';
 
-describe('NewsDetails', () => {
-  let component: NewsDetails;
-  let fixture: ComponentFixture<NewsDetails>;
+describe('DefaultLayout', () => {
+  let component: DefaultLayout;
+  let fixture: ComponentFixture<DefaultLayout>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NewsDetails]
+      imports: [DefaultLayout]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NewsDetails);
+    fixture = TestBed.createComponent(DefaultLayout);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

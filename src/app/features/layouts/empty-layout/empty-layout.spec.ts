@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewsDetails } from './news-details';
+import { EmptyLayout } from './empty-layout';
 
-describe('NewsDetails', () => {
-  let component: NewsDetails;
-  let fixture: ComponentFixture<NewsDetails>;
+describe('EmptyLayout', () => {
+  let component: EmptyLayout;
+  let fixture: ComponentFixture<EmptyLayout>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NewsDetails]
+      imports: [EmptyLayout]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NewsDetails);
+    fixture = TestBed.createComponent(EmptyLayout);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

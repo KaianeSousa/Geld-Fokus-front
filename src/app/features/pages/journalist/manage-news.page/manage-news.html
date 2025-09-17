@@ -1,0 +1,79 @@
+<app-manage-navbar></app-manage-navbar>
+
+<div class="manage-news container">
+  <div class="mn-header">
+    <h1>Gerenciar Notícias</h1>
+
+    <app-search-news (filtersChanged)="applyFilters($event)"></app-search-news>
+  </div>
+
+  <div class="mn-table-wrap">
+    <table class="mn-table">
+      <thead>
+        <tr>
+          <th>Imagem</th>
+          <th>Título</th>
+          <th>Descrição</th>
+          <th>Tags</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let news of filteredNews">
+
+          <td class="col-image">
+            <img [src]="news.imageUrl" [alt]="news.title" />
+          </td>
+
+          <td class="col-title">
+            <div class="title-text">{{ news.title }}</div>
+          </td>
+
+          <td class="col-desc">
+            <div class="desc-text">{{ news.description }}</div>
+          </td>
+
+          <td class="col-tags">
+            <span *ngFor="let tag of news.tags" class="tag">{{ tag.name }}</span>
+          </td>
+
+          <td class="col-actions">
+            <button class="btn-icon" (click)="edit(news.id)">
+              <span class="material-icons">edit</span>
+            </button>
+            <button class="btn-icon danger" (click)="delete(news.id)">
+              <span class="material-icons">delete</span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="empty" *ngIf="filteredNews.length === 0">
+      Nenhuma notícia encontrada.
+    </div>
+  </div>
+
+
+  <div class="mn-footer">
+    <div class="mn-pagination">
+      <button (click)="changePage(pageState.value.page - 1)" [disabled]="pageState.value.page === 1">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <span>Página {{ pageState.value.page }}</span>
+      <button (click)="changePage(pageState.value.page + 1)">
+        <span class="material-icons">arrow_forward</span>
+      </button>
+    </div>
+
+    <div class="mn-page-size">
+      Mostrar
+      <select (change)="onPageSizeChange($event)">
+        <option [value]="5">5</option>
+        <option [value]="10" selected>10</option>
+        <option [value]="20">20</option>
+      </select>
+      por página
+    </div>
+  </div>
+</div>
