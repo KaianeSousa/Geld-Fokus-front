@@ -1,0 +1,33 @@
+<nav class="manage-navbar">
+  <div class="manage-navbar__brand">
+    <div class="manage-navbar__logo">
+      <img src="assets/logos/logo.svg" alt="Logo">
+    </div>
+  </div>
+
+  <button class="manage-navbar__toggle" (click)="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="manage-navbar__menu">
+    <ul class="manage-navbar__links">
+      <li>
+        <a routerLink="/register-news" routerLinkActive="active">
+          Adicionar
+        </a>
+      </li>
+      <li>
+        <a routerLink="/query-news" routerLinkActive="active">
+          Buscar
+        </a>
+      </li>
+      <li>
+        <a routerLink="/manage-news" routerLinkActive="active">
+          Gerenciar
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
