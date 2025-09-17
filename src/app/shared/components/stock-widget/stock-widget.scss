@@ -1,70 +1,79 @@
 .widget-container {
   background: white;
+  width: 400px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
-
+  
   .widget-title {
     font-size: 1.125rem;
     font-weight: 700;
     color: var(--text-color);
     margin-bottom: 1rem;
   }
-
+  
   .widget-content {
     .chart-placeholder {
       margin-bottom: 1rem;
-
-      img {
-        width: 100%;
-        height: 8rem;
-        object-fit: cover;
-        border-radius: 0.25rem;
-      }
     }
-
+    
     .stock-list {
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
-
+      
       .stock-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 0.5rem 0;
         border-bottom: 1px solid var(--border-color);
-
+        
         &:last-child {
           border-bottom: none;
         }
-
-        .stock-symbol {
-          font-weight: 600;
-          color: var(--text-color);
+        
+        .stock-logo-symbol {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.5rem;
+          
+          .stock-image {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+          
+          .stock-symbol {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 0.875rem;
+          }
         }
-
+        
         .stock-value {
           color: var(--text-color);
         }
-
+        
         .stock-change {
           font-size: 0.875rem;
           font-weight: 500;
           padding: 0.25rem 0.5rem;
           border-radius: 0.25rem;
-
+          
           &.positive {
             color: var(--success-color);
             background-color: #dcfce7;
           }
-
+          
           &.negative {
             color: var(--danger-color);
             background-color: #fef2f2;
           }
         }
-
+        
         .stock-info {
           display: flex;
           align-items: center;
@@ -74,4 +83,3 @@
     }
   }
 }
-

@@ -5,9 +5,9 @@ import { map, startWith, catchError } from 'rxjs/operators';
 import { LatestNewsSection } from '../../../../shared/sections/latest-news-section/latest-news-section';
 import { AllNewsSection } from '../../../../shared/sections/all-news-section/all-news-section';
 import { NewsCarouselComponent } from '../../../../shared/components/news-carousel/news-carousel.component';
+import { StocksSidebar } from '../../../../shared/components/stocks-sidebar/stocks-sidebar';
 import { Article } from '../../../../core/@types/Article';
 import { ArticleService } from '../../../../core/services/article.service';
-
 
 @Component({
   selector: 'app-home',
@@ -17,11 +17,13 @@ import { ArticleService } from '../../../../core/services/article.service';
     LatestNewsSection,
     AllNewsSection,
     NewsCarouselComponent,
+    StocksSidebar
   ],
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss']
 })
 export class HomePage implements OnInit {
+  selectedCategory: string | null = null;
   private articleService = inject(ArticleService);
 
   combinedState$!: Observable<{
@@ -31,13 +33,19 @@ export class HomePage implements OnInit {
   }>;
 
   ngOnInit(): void {
-    const recentNewsState$ = this.articleService.getPublishedArticles(0, 5).pipe(
+    this.loadArticles();
+  }
+
+  loadArticles(category?: string): void {
+    const recentNewsState$ = (category
+      ? this.articleService.getArticlesByCategory(category, 0, 5)
+      : this.articleService.getPublishedArticles(0, 5)
+    ).pipe(
       map(page => ({ loading: false, news: page.content })),
       startWith({ loading: true, news: null }),
       catchError(() => of({ loading: false, news: null }))
     );
 
-  
     const popularNewsState$ = this.articleService.getPublishedArticles(0, 5).pipe(
       map(page => ({ loading: false, news: page.content })),
       startWith({ loading: true, news: null }),
@@ -51,5 +59,10 @@ export class HomePage implements OnInit {
         popular: popular.news
       }))
     );
+  }
+
+  onCategorySelected(category: string): void {
+    this.selectedCategory = category;
+    this.loadArticles(category);
   }
 }

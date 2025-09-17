@@ -1,7 +1,7 @@
 .register-page {
   display: grid;
   place-items: center;
-  min-height: 80vh;
+  min-height: 40vh;
   padding: 2rem;
   background-color: var(--bg-primary-color);
   box-sizing: border-box;
@@ -85,6 +85,7 @@
   &__textarea {
     width: 100%;
     padding: 0.75rem 1rem;
+    min-height: 50px;
     border: 1px solid var(--text-light-gray);
     border-radius: 8px;
     font-size: 1rem;
@@ -97,6 +98,8 @@
       color: var(--text-light-gray);
       font-size: 1rem;
       opacity: 1;
+      vertical-align: top;
+      line-height: normal;
     }
   }
 }
@@ -182,7 +185,6 @@
     }
   }
 
-
   .options-list {
     position: absolute;
     top: calc(100% + 0.25rem);
@@ -190,11 +192,11 @@
     width: 100%; 
     max-height: 200px;
     overflow-y: auto;
-    background: var(--primary-color);
+    background: var(--bg-primary-color);
     border: 1px solid var(--text-light-gray);
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    z-index: 1002;
+    z-index: 9999;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -208,12 +210,15 @@
 
       &:hover {
         background-color: var(--bg-secondary-color);
-        color: var(--text-light);
+        color: var(--text-dark-color);
+      }
+      &:focus {
+        color: var(--text-dark-color);
       }
       
       &.selected {
         background-color: var(--tertiary-color);
-        color: var(--text-light);
+        color: var(--text-dark-color);
       }
 
       &:first-child {

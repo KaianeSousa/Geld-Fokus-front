@@ -16,7 +16,7 @@ export const routes: Routes = [
   {
     path: 'login/:role',
     loadComponent: () =>
-      import('./features/pages/authentication/login/login.page').then((m) => m.LoginFeature),
+      import('./features/pages/authentication/login/login.page').then((m) => m.LoginPage),
     title: 'Login'
   },
   {

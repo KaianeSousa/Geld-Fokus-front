@@ -10,5 +10,5 @@ import { CommonModule } from '@angular/common';
 })
 export class StockWidgetComponent {
   @Input() title = 'Ações';
-  @Input() stocks: { symbol: string, value: string, change: string, positive: boolean }[] = [];
+  @Input() stocks: { symbol: string, name: string, logoUrl: string, value: string, change: string, positive: boolean }[] = [];
 }

@@ -14,19 +14,25 @@
             <app-title-section [font]="{'font-size': '2.5rem'}" [content]="state.news.title"></app-title-section>
 
             <p class="news-subtitle">{{ state.news.subtitle }}</p>
-            <div class="tag-container">
-               @for (tag of state.news.tags; track tag) {
-                  <span class="news-tag"> | {{ tag.name }}</span>
-               }
-            </div>
 
-            <p class="news-published-date">Publicado em {{ state.news.publishedDate | date:'dd/MM/yyyy HH:mm' }} | Atualizado em {{ state.news.updatedAt | date:'dd/MM/yyyy HH:mm' }}</p>
+            @if (state.news.tagNames.length) {
+               <div class="tag-container">
+                  @for (tag of state.news.tagNames; track tag) {
+                     <span class="news-tag"> | {{ tag }}</span>
+                  }
+               </div>
+            }
+
+            <p class="news-published-date">
+               Publicado em {{ state.news.publishedDate | date:'dd/MM/yyyy HH:mm' }}
+               </p>
+
             <div class="spacer"></div>
 
             <div class="news-content">
-               <img class="cover-image" [ngSrc]="state.news.coverImage" [alt]="state.news.title" width="100" height="100">
+               <img class="cover-image" [ngSrc]="state.news.coverImage" [alt]="state.news.title" width="600" height="400">
 
-               <p class="news-author">Por {{ state.news.author.name }}</p>
+               <p class="news-author">Por {{ state.news.authorName }}</p>
 
                <article class="news-body">
                   {{ state.news.content }}
