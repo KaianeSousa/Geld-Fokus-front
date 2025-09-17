@@ -19,41 +19,38 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let news of filteredNews">
-
+        <tr *ngFor="let article of filteredArticles">
           <td class="col-image">
-            <img [src]="news.imageUrl" [alt]="news.title" />
+            <img [src]="article.coverImage" [alt]="article.title" />
           </td>
-
+      
           <td class="col-title">
-            <div class="title-text">{{ news.title }}</div>
+            <div class="title-text">{{ article.title }}</div>
           </td>
-
+      
           <td class="col-desc">
-            <div class="desc-text">{{ news.description }}</div>
+            <div class="desc-text">{{ article.subtitle }}</div>
           </td>
-
+      
           <td class="col-tags">
-            <span *ngFor="let tag of news.tags" class="tag">{{ tag.name }}</span>
+            <span *ngFor="let tag of article.tagNames" class="tag">{{ tag.name }}</span>
           </td>
-
+      
           <td class="col-actions">
-            <button class="btn-icon" (click)="edit(news.id)">
+            <button class="btn-icon" (click)="edit(article.id!)">
               <span class="material-icons">edit</span>
             </button>
-            <button class="btn-icon danger" (click)="delete(news.id)">
+            <button class="btn-icon danger" (click)="delete(article.id!)">
               <span class="material-icons">delete</span>
             </button>
           </td>
         </tr>
       </tbody>
+      
+      <div class="empty" *ngIf="filteredArticles.length === 0">
+        Nenhum artigo encontrado.
+      </div>
     </table>
-
-    <div class="empty" *ngIf="filteredNews.length === 0">
-      Nenhuma notícia encontrada.
-    </div>
-  </div>
-
 
   <div class="mn-footer">
     <div class="mn-pagination">

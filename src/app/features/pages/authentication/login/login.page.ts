@@ -16,7 +16,7 @@ import { User } from "../../../../core/@types/User";
   styleUrls: ['./login.page.scss']
 })
 
-export class LoginFeature implements OnInit {
+export class LoginPage implements OnInit {
   public role: string | null = null;
   public headerTitle = 'Login';
 

@@ -1,15 +1,15 @@
 <app-navbar></app-navbar>
 
 <div class="site-layout">
-
   <main class="main-content">
-      <router-outlet></router-outlet>
-   </main>
+    <router-outlet></router-outlet>
+  </main>
 
-   <!--<aside class="sidebar-content">
+  @if (isHome()) {
+    <aside class="sidebar-content">
       <app-stocks-sidebar></app-stocks-sidebar>
-   </aside> -->
-
+    </aside>
+  }
 </div>
 
 <app-footer></app-footer>

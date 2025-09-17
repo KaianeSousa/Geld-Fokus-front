@@ -7,13 +7,13 @@
 
   <div class="navbar__menu">
     <ul class="navbar__links">
-      <li (click)="goToIbovespaPage()" (keydown.enter)="goToIbovespaPage()" tabindex="0" role="button">Ibovespa</li>
-      <li (click)="goToP500Page()" (keydown.enter)="goToP500Page()" tabindex="0" role="button">S&P500</li>
-      <li (click)="goToCriptocurrencyPage()" (keydown.enter)="goToCriptocurrencyPage()" tabindex="0" role="button">Criptomoedas</li>
-      <li (click)="goToRealEstatePage()" (keydown.enter)="goToRealEstatePage()" tabindex="0" role="button">Mercado imobiliário</li>
-      <li (click)="goToEarningsPage()" (keydown.enter)="goToEarningsPage()" tabindex="0" role="button">Proventos</li>
-      <li (click)="goToETFsPage()" (keydown.enter)="goToETFsPage()" tabindex="0" role="button">ETFs</li>
-      <li (click)="goToREITsPage()" (keydown.enter)="goToREITsPage()" tabindex="0" role="button">REITs</li>
+      <li (click)="selectCategory('Ibovespa')" tabindex="0" role="button">Ibovespa</li>
+      <li (click)="selectCategory('S&P500')" tabindex="0" role="button">S&P500</li>
+      <li (click)="selectCategory('Criptomoedas')" tabindex="0" role="button">Criptomoedas</li>
+      <li (click)="selectCategory('Mercado imobiliário')" tabindex="0" role="button">Mercado imobiliário</li>
+      <li (click)="selectCategory('Proventos')" tabindex="0" role="button">Proventos</li>
+      <li (click)="selectCategory('ETFs')" tabindex="0" role="button">ETFs</li>
+      <li (click)="selectCategory('REITs')" tabindex="0" role="button">REITs</li>
     </ul>
 
     <div class="navbar__actions">
@@ -52,12 +52,6 @@
             >
             Editor
           </a>
-            <a class="dropdown__item"
-            (click)="goToLoginAs('visitante')"
-            (keyword.enter)="goToLoginAs('visitante')"
-            tabindex="0"
-            role="button"
-            >Visitante</a>
           </div>
         </div>
       }

@@ -61,6 +61,34 @@ export class ArticleService {
       return this.http.get<Page<Article>>(`${this.endpoint}/get-all-published`, { params });
     }
     
+    getPublishedArticlesByAuthor(
+      page = 0,
+      size = 10,
+      category?: string,
+      tags?: string[],
+      searchTerm?: string,
+      authorName?: string
+    ): Observable<Page<Article>> {
+      let params = new HttpParams()
+        .set('page', page.toString())
+        .set('size', size.toString());
+    
+      if (category) params = params.set('category', category);
+      if (tags?.length) params = params.set('tags', tags.join(','));
+      if (searchTerm) params = params.set('search', searchTerm);
+      if (authorName) params = params.set('author', authorName);
+    
+      return this.http.get<Page<Article>>(`${this.endpoint}/get-all-published`, { params });
+    }
+    
+    getArticlesByCategory(category: string, page = 0, size = 10): Observable<Page<Article>> {
+      const params = new HttpParams()
+        .set('category', category)
+        .set('page', page)
+        .set('size', size);
+  
+      return this.http.get<Page<Article>>(`${this.endpoint}/get-by-category`, { params });
+    }
   
     getArticleBySlug(slug: string): Observable<Article> {
       return this.http.get<Article>(`${this.endpoint}/get-by-slug/${slug}`);

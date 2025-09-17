@@ -6,13 +6,14 @@ import {Article} from '../../../core/@types/Article';
 import { TitleSectionComponent } from '../../components/title-section/title-section.component';
 import {catchError, map, Observable, of, startWith} from 'rxjs';
 import {ArticleService} from '../../../core/services/article.service';
+import { RouterLink } from '@angular/router';
 
 Swiper.use([Navigation]);
 
 @Component({
    selector: 'app-latest-news-section',
    standalone: true,
-   imports: [CommonModule, NgOptimizedImage, TitleSectionComponent],
+   imports: [CommonModule, NgOptimizedImage, TitleSectionComponent, RouterLink],
    templateUrl: './latest-news-section.html',
    styleUrls: ['./latest-news-section.scss']
 })

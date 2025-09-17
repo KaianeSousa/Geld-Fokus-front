@@ -12,9 +12,9 @@ export interface Article {
     coverImage : string,
     articleStatus : ArticleStatus,
     publishedDate : string,
-    author: User,
+    authorName: User,
     category : Category,
-    tags : Tag[],
+    tagNames : Tag[],
     viewCount : number,
     createdAt : string,
     updatedAt : string

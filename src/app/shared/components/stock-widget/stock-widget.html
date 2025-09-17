@@ -1,15 +1,16 @@
 <div class="widget-container">
   <h3 class="widget-title">{{ title }}</h3>
   <div class="widget-content">
-    <div class="chart-placeholder">
-      <img src="https://i.imgur.com/algjVW2.png" alt="Gráfico de ações">
-    </div>
     
     <ul class="stock-list">
       <li class="stock-item" *ngFor="let stock of stocks">
-        <span class="stock-symbol">{{ stock.symbol }}</span>
+        <div class="stock-logo-symbol">
+          <img class="stock-image" [src]="stock.logoUrl" [alt]="stock.symbol + ' logo'">
+          <span class="stock-symbol">{{ stock.symbol }}</span>
+          <span class="stock-name"> {{ stock.name }}</span>
+        </div>
         <div class="stock-info">
-          <span class="stock-value">{{ stock.value }}</span>
+          <span class="stock-value">R$ {{ stock.value }}</span>
           <span class="stock-change" [ngClass]="{'positive': stock.positive, 'negative': !stock.positive}">
             {{ stock.change }}
           </span>
