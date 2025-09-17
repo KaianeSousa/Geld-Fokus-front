@@ -112,7 +112,7 @@
       &:focus {
         outline: none;
         border-color: var(--tertiary-color);
-        box-shadow: 0 0 0 4px  rgba(255, 106, 0, 0.25);
+        box-shadow: 0 0 0 1px rgba(1, 53, 194, 0.219);
       }
     }
   
@@ -129,7 +129,7 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    color: var(--bg-secondary-color);
+    color: var(--primary-color);
     transition: color 0.3s ease;
   
     &:hover {
