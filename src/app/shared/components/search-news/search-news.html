@@ -1,0 +1,26 @@
+<div class="manage-news container">
+    <!-- Barra de busca -->
+    <div class="mn-search">
+        <h2>Procurar notícias</h2>
+      <input
+        type="search"
+        [formControl]="search"
+        placeholder="Pesquise pelo título da notícia aqui"
+      />
+    </div>
+
+    <!-- Filtros -->
+           <h2>Filtros</h2>
+    <div class="mn-filters">
+      <select [formControl]="tag">
+        <option value="">Todas as tags</option>
+        <option value="/">/</option>
+      </select>
+
+      <select [formControl]="author">
+        <option value="">Todos os autores</option>
+        <option value="/">/</option>
+
+      </select>
+    </div>
+  </div>
