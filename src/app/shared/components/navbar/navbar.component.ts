@@ -17,6 +17,7 @@ export class NavbarComponent {
   isLoggedIn = this.authService.isLogged;
   openMenu = false;
   showLoginDropdown = false;
+  showProfileDropdown = false;
 
   @Output() categorySelected = new EventEmitter<string>();
 
@@ -57,5 +58,18 @@ export class NavbarComponent {
 
   selectCategory(category: string) {
     this.categorySelected.emit(category);
+  }
+
+  toggleProfileDropdown(event: Event) {
+    event.stopPropagation();
+    this.showProfileDropdown = !this.showProfileDropdown;
+  }
+
+  goToManageArticles() {
+    this.router.navigate(['/manage-news']);
+  }
+  
+  goToPublishArticle() {
+    this.router.navigate(['/register-news']);
   }
 }

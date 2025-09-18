@@ -1,0 +1,57 @@
+<div class="edit-page">
+    <main class="edit-content">
+      <div class="edit-content__header">
+        <h1 class="title">Editar artigo</h1>
+        <p class="subtitle">
+          Prezado(a) jornalista, gostariamos de reforçar a importância de verificar sempre a veracidade das informações antes de publicá-las. É fundamental que todos os dados sejam corretos, pois a disseminação de notícias falsas acarretará em consequências legais. Contamos com sua responsabilidade e compromisso com a verdade.
+        </p>
+      </div>
+  
+      <form class="register-form" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+        <div class="input-group">
+          <label for="title">Título</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            class="input-group__input"
+            placeholder=""
+            [(ngModel)]="article.title"
+            required
+          />
+        </div>
+  
+  
+        <div class="input-group">
+          <label for="subtitle">Subtítulo</label>
+          <input
+            type="text"
+            id="subtitle"
+            name="subtitle"
+            class="input-group__input"
+            placeholder=""
+            [(ngModel)]="article.subtitle"
+            required
+          />
+        </div>
+  
+        <div class="input-group">
+          <label for="content">Conteúdo do artigo</label>
+          <textarea
+            id="content"
+            name="content"
+            class="input-group__textarea"
+            rows="10"
+            placeholder=""
+            [(ngModel)]="article.content"
+            required
+          ></textarea>
+        </div>
+  
+        <button type="submit" class="btn btn--primary">
+          Editar artigo
+        </button>
+      </form>
+    </main>
+  </div>
+  

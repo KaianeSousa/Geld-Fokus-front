@@ -20,7 +20,14 @@ export class ArticleService {
     updateArticle(id: string, dto: CreateArticle): Observable<Article> {
       return this.http.put<Article>(`${this.endpoint}/update-article/${id}`, dto);
     }
-  
+
+    updateArticleBySlug(
+      slug: string, 
+      dto: { title: string; subtitle: string; content: string }
+    ): Observable<Article> {
+      return this.http.put<Article>(`${this.endpoint}/update-article/${slug}`, dto);
+    }
+    
     deleteArticle(id: string): Observable<void> {
       return this.http.delete<void>(`${this.endpoint}/delete-article/${id}`);
     }

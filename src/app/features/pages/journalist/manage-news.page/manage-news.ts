@@ -62,8 +62,8 @@ export class ManageNews implements OnInit {
     this.pageState$.next({ ...prev, page });
   }
 
-  edit(articleId: number) {
-    this.router.navigate(['/artigos', articleId, 'editar']);
+  edit(slug: string) {
+    this.router.navigate(['/edit-news', slug]);
   }
 
   delete(articleId: number) {
