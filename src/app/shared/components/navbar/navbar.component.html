@@ -1,66 +1,69 @@
-<nav class="navbar" [class.opened-menu]="openMenu">
-  <div class="navbar__brand">
-    <a class="navbar__logo" (click)="goToHome()" (keydown.enter)="goToHome()" tabindex="0" role="button">
-      <img ngSrc="assets/logos/logo.svg" alt="Logo" width="20" height="19" priority />
-    </a>
-  </div>
+<nav class="navbar" >
+   <div class="content" [class.opened-menu]="openMenu">
+      <div class="navbar__brand">
+         <a class="navbar__logo" (click)="goToHome()" (keydown.enter)="goToHome()" tabindex="0" role="button">
+            <img ngSrc="assets/logos/logo.svg" alt="Logo" width="20" height="19" priority />
+         </a>
+      </div>
 
-  <div class="navbar__menu">
-    <ul class="navbar__links">
-      <li (click)="selectCategory('Ibovespa')" tabindex="0" role="button">Ibovespa</li>
-      <li (click)="selectCategory('S&P500')" tabindex="0" role="button">S&P500</li>
-      <li (click)="selectCategory('Criptomoedas')" tabindex="0" role="button">Criptomoedas</li>
-      <li (click)="selectCategory('Mercado imobiliário')" tabindex="0" role="button">Mercado imobiliário</li>
-      <li (click)="selectCategory('Proventos')" tabindex="0" role="button">Proventos</li>
-      <li (click)="selectCategory('ETFs')" tabindex="0" role="button">ETFs</li>
-      <li (click)="selectCategory('REITs')" tabindex="0" role="button">REITs</li>
-    </ul>
+      <div class="navbar__menu">
+         <ul class="navbar__links">
+            <li (click)="selectCategory('Ibovespa')" tabindex="0" role="button">Ibovespa</li>
+            <li (click)="selectCategory('S&P500')" tabindex="0" role="button">S&P500</li>
+            <li (click)="selectCategory('Criptomoedas')" tabindex="0" role="button">Criptomoedas</li>
+            <li (click)="selectCategory('Mercado imobiliário')" tabindex="0" role="button">Mercado imobiliário</li>
+            <li (click)="selectCategory('Proventos')" tabindex="0" role="button">Proventos</li>
+            <li (click)="selectCategory('ETFs')" tabindex="0" role="button">ETFs</li>
+            <li (click)="selectCategory('REITs')" tabindex="0" role="button">REITs</li>
+         </ul>
 
-    <div class="navbar__actions">
-      @if (isLoggedIn()) {
-        <a
-          class="navbar__actions__button"
-          (click)="goToProfile()"
-          (keydown.enter)="goToProfile()"
-          tabindex="0"
-          role="button">
-          Perfil
-        </a>
-      } @else {
-        <div class="navbar__actions__dropdown">
-          <a
-            class="navbar__actions__dropdown__button"
-            (click)="toggleLoginDropdown($event)"
-            (keyword.enter)="toggleLoginDropdown($event)"
-            tabindex="0"
-            role="button">
-            Entrar
-          </a>
-          <div class="dropdown__menu" [class.show]="showLoginDropdown">
-            <a class="dropdown__item" 
-            (click)="goToLoginAs('jornalista')"
-            (keyword.enter)="goToLoginAs('jornalista')"
-            tabindex="0"
-            role="button"
-            >Jornalista
-          </a>
-            <a class="dropdown__item" 
-            (click)="goToLoginAs('editor')"
-            (keyword.enter)="goToLoginAs('editor')"
-            tabindex="0"
-            role="button"
-            >
-            Editor
-          </a>
-          </div>
-        </div>
-      }
-    </div>
-  </div>
+         <div class="navbar__actions">
+            @if (isLoggedIn()) {
+               <a
+                  class="navbar__actions__button"
+                  (click)="goToProfile()"
+                  (keydown.enter)="goToProfile()"
+                  tabindex="0"
+                  role="button">
+                  Perfil
+               </a>
+            } @else {
+               <div class="navbar__actions__dropdown">
+                  <a
+                     class="navbar__actions__dropdown__button"
+                     (click)="toggleLoginDropdown($event)"
+                     (keyword.enter)="toggleLoginDropdown($event)"
+                     tabindex="0"
+                     role="button">
+                     Entrar
+                  </a>
+                  <div class="dropdown__menu" [class.show]="showLoginDropdown">
+                     <a class="dropdown__item"
+                        (click)="goToLoginAs('jornalista')"
+                        (keyword.enter)="goToLoginAs('jornalista')"
+                        tabindex="0"
+                        role="button"
+                     >Jornalista
+                     </a>
+                     <a class="dropdown__item"
+                        (click)="goToLoginAs('editor')"
+                        (keyword.enter)="goToLoginAs('editor')"
+                        tabindex="0"
+                        role="button"
+                     >
+                        Editor
+                     </a>
+                  </div>
+               </div>
+            }
+         </div>
+      </div>
 
-  <button class="navbar__toggle" (click)="openMenu = !openMenu" aria-label="Toggle Menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+      <button class="navbar__toggle" (click)="openMenu = !openMenu" aria-label="Toggle Menu">
+         <span></span>
+         <span></span>
+         <span></span>
+      </button>
+   </div>
+
 </nav>
