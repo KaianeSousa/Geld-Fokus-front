@@ -21,6 +21,23 @@
         />
       </div>
 
+       <div class="input-group">
+          <label for="category">Categoria</label>
+          <select
+             id="category"
+             name="categoryName"
+             class="input-group__select"
+             [(ngModel)]="register.categoryName"
+             required
+          >
+             <option [ngValue]="" selected disabled>Selecione uma categoria</option>
+             @for (category of (categoryState$ | async)?.availableCategories || []; track category.name) {
+                <option [value]="category.name">{{ category.name }}</option>
+             }
+
+          </select>
+       </div>
+
       <div class="input-group">
         <label for="subtitle">Subtítulo</label>
         <input
@@ -67,7 +84,7 @@
             @for (tag of register.tagNames; track tag) {
               <span class="tag-item">
                 {{ tag }}
-                <span 
+                <span
                   class="remove-tag"
                   (click)="removeTag(tag, $event); $event.stopPropagation()"
                   (keydown.enter)="removeTag(tag, $event); $event.stopPropagation()"
@@ -77,13 +94,13 @@
                 >×</span>
               </span>
             }
-            
+
             @if (!register.tagNames.length) {
               <span class="selected-value">Selecione as tags</span>
             }
           </div>
           <span class="arrow">&#9662;</span>
-          
+
           @if (dropdownOpen) {
             <ul class="options-list" id="tags-options" role="listbox">
               @for (tag of (newsState$ | async)?.availableTags || []; track tag.name) {
@@ -103,7 +120,7 @@
           }
         </div>
         <input type="hidden" name="tags"   [ngModel]="register.tagNames.join(',')" required />
-        
+
         @if (registerForm.controls['tags'].touched && registerForm.controls['tags'].invalid) {
           <span class="error">Tags são obrigatórias.</span>
         }
