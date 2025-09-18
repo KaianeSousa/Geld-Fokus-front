@@ -19,14 +19,40 @@
 
          <div class="navbar__actions">
             @if (isLoggedIn()) {
-               <a
-                  class="navbar__actions__button"
-                  (click)="goToProfile()"
-                  (keydown.enter)="goToProfile()"
-                  tabindex="0"
-                  role="button">
-                  Perfil
-               </a>
+               <div class="navbar__actions__dropdown">
+                  <a
+                    class="navbar__actions__dropdown__button"
+                    (click)="toggleProfileDropdown($event)"
+                    (keydown.enter)="toggleProfileDropdown($event)"
+                    tabindex="0"
+                    role="button">
+                    Perfil
+                  </a>
+                  <div class="dropdown__menu" [class.show]="showProfileDropdown">
+                    <a class="dropdown__item"
+                       (click)="goToManageArticles()"
+                       (keydown.enter)="goToManageArticles()"
+                       tabindex="0"
+                       role="button">
+                       Gerenciar artigos
+                    </a>
+                    <a class="dropdown__item"
+                       (click)="goToPublishArticle()"
+                       (keydown.enter)="goToPublishArticle()"
+                       tabindex="0"
+                       role="button">
+                       Publicar artigo
+                    </a>
+                    <a class="dropdown__item"
+                    (click)="logout()"
+                    (keydown.enter)="logout()"
+                    tabindex="0"
+                    role="button">
+                     Sair
+                  </a>
+                  </div>
+                </div>
+                
             } @else {
                <div class="navbar__actions__dropdown">
                   <a
