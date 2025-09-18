@@ -5,4 +5,5 @@ export interface Stock {
     value: string;
     change: string;
     positive: boolean;
+    history: { date: string; close: number }[];
 }
