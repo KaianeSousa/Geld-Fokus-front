@@ -5,11 +5,12 @@
     <router-outlet></router-outlet>
   </main>
 
-  @if (isHome()) {
+  @if (isHome() || isNewDetails()) {
     <aside class="sidebar-content">
       <app-stocks-sidebar></app-stocks-sidebar>
     </aside>
   }
 </div>
-
 <app-footer></app-footer>
+<app-toast-container></app-toast-container>
+
