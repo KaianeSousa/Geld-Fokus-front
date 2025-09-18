@@ -5,7 +5,6 @@ import { map, startWith, catchError } from 'rxjs/operators';
 import { LatestNewsSection } from '../../../../shared/sections/latest-news-section/latest-news-section';
 import { AllNewsSection } from '../../../../shared/sections/all-news-section/all-news-section';
 import { NewsCarouselComponent } from '../../../../shared/components/news-carousel/news-carousel.component';
-import { StocksSidebar } from '../../../../shared/components/stocks-sidebar/stocks-sidebar';
 import { Article } from '../../../../core/@types/Article';
 import { ArticleService } from '../../../../core/services/article.service';
 
@@ -17,7 +16,6 @@ import { ArticleService } from '../../../../core/services/article.service';
     LatestNewsSection,
     AllNewsSection,
     NewsCarouselComponent,
-    StocksSidebar
   ],
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss']
