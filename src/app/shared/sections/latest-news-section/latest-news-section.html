@@ -22,7 +22,7 @@
     
           <div class="featured-content">
             <h3>
-              <a class="featured-news-link">
+              <a [routerLink]="['/news', state.news[0].slug]" class="featured-news-link">
                 {{ state.news[0].title }}
               </a> 
             </h3>
