@@ -13,7 +13,7 @@ export interface Article {
     articleStatus : ArticleStatus,
     publishedDate : string,
     authorName: User,
-    category : Category,
+    categoryName : Category,
     tagNames : Tag[],
     viewCount : number,
     createdAt : string,

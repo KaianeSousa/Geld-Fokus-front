@@ -30,12 +30,12 @@ export class NavbarComponent {
   }
 
   toggleLoginDropdown(event: Event) {
-    event.stopPropagation(); 
+    event.stopPropagation();
     this.showLoginDropdown = !this.showLoginDropdown;
   }
 
   goToLoginAs(role: string): void {
-    this.showLoginDropdown = false; 
+    this.showLoginDropdown = false;
     this.router.navigate(['/login', role]);
   }
 
@@ -54,6 +54,7 @@ export class NavbarComponent {
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/']);
+     this.showProfileDropdown = false;
   }
 
   selectCategory(category: string) {
@@ -67,9 +68,12 @@ export class NavbarComponent {
 
   goToManageArticles() {
     this.router.navigate(['/manage-news']);
+     this.showProfileDropdown = false;
   }
-  
+
   goToPublishArticle() {
     this.router.navigate(['/register-news']);
+     this.showProfileDropdown = false;
+
   }
 }

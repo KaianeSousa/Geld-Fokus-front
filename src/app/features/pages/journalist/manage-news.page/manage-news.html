@@ -1,87 +1,115 @@
-<!--<app-manage-navbar></app-manage-navbar> -->
-
 <div class="manage-news container">
-  <div class="mn-header">
-    <h1>Gerenciar Notícias</h1>
+   <div class="mn-header">
+      <h1>Gerenciar Notícias</h1>
 
-   <!-- <app-search-news (filtersChanged)="applyFilters($event)"></app-search-news> -->
-  </div>
+      <div class="mn-filters">
+         <input
+            type="text"
+            class="filter-input"
+            placeholder="Buscar por título..."
+            [formControl]="searchTerm">
 
-  <div class="mn-table-wrap">
-    <table class="mn-table">
-      <thead>
-        <tr>
-          <th>Imagem</th>
-          <th>Título</th>
-          <th>Descrição</th>
-          <th>Categoria</th>
-          <th>Autor</th>
-          <th>Tags</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let article of filteredArticles">
-          <td class="col-image">
-            <img [src]="article.coverImage" [alt]="article.title" />
-          </td>
-      
-          <td class="col-title">
-            <div class="title-text">{{ article.title }}</div>
-          </td>
-      
-          <td class="col-desc">
-            <div class="desc-text">{{ article.subtitle }}</div>
-          </td>
-
-          <td class="col-desc">
-            <div class="desc-text">{{ article.category }}</div>
-          </td>
-
-          <td class="col-desc">
-            <div class="desc-text">{{ article.authorName }}</div>
-          </td>
-      
-          <td class="col-tags">
-            <span *ngFor="let tag of article.tagNames" class="tag">{{ tag }}</span>
-          </td>
-          
-      
-          <td class="col-actions">
-            <button class="btn-icon" (click)="edit(article.slug)">
-              <span class="material-icons">edit</span>
-            </button>
-            <button class="btn-icon danger" (click)="delete(article.id!)">
-              <span class="material-icons">delete</span>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-      
-      <div class="empty" *ngIf="filteredArticles.length === 0">
-        Nenhum artigo encontrado.
+         <button class="btn-clear" (click)="clearFilters()">Limpar Filtro</button>
       </div>
-    </table>
+   </div>
 
-  <div class="mn-footer">
-    <div class="mn-pagination">
-      <button (click)="changePage(pageState.value.page - 1)" [disabled]="pageState.value.page === 1">
-        <span class="material-icons">arrow_back</span>
-      </button>
-      <span>Página {{ pageState.value.page }}</span>
-      <button (click)="changePage(pageState.value.page + 1)">
-        <span class="material-icons">arrow_forward</span>
-      </button>
-    </div>
+   @if (state$ | async; as state) {
 
-    <div class="mn-page-size">
-      Mostrar
-      <select (change)="onPageSizeChange($event)">
-        <option [value]="5">5</option>
-        <option [value]="10" selected>10</option>
-        <option [value]="20">20</option>
-      </select>
-      por página
-    </div>
-  </div>
+      @if (state.loading) {
+         <div class="feedback-container">
+            <p>Carregando artigos...</p>
+         </div>
+      }
+
+      @else if (state.error) {
+         <div class="feedback-container error">
+            <p>Falha ao carregar os artigos. Tente novamente mais tarde.</p>
+         </div>
+      }
+
+      @else if (state.response) {
+         <div class="mn-table-wrap">
+            <table class="mn-table">
+               <thead>
+               <tr>
+                  <th>Imagem</th>
+                  <th>Título</th>
+                  <th>Subtítulo</th>
+                  <th>Categoria</th>
+                  <th>Autor</th>
+                  <th>Tags</th>
+                  <th>Ações</th>
+               </tr>
+               </thead>
+               <tbody>
+                  @for (article of state.response.content; track article.id) {
+                     <tr>
+                        <td class="col-image">
+                           <img [ngSrc]="article.coverImage" [alt]="article.title" width="100" height="100" />
+                        </td>
+                        <td class="col-title">
+                           <div class="title-text">{{ article.title }}</div>
+                        </td>
+                        <td class="col-desc">
+                           <div class="desc-text">{{ article.subtitle }}</div>
+                        </td>
+                        <td class="col-category">
+                           <div class="category-text">{{ article.categoryName }}</div>
+                        </td>
+                        <td class="col-author">
+                           <div class="author-text">{{ article.authorName }}</div>
+                        </td>
+                        <td class="col-tags">
+                           @for(tag of article.tagNames; track tag) {
+                              <span class="tag">{{ tag }}</span>
+                           }
+                        </td>
+                        <td class="col-actions">
+                           <button class="btn-icon" (click)="edit(article.slug)">
+                              <span class="material-icons">edit</span>
+                           </button>
+                           <button class="btn-icon danger" (click)="delete(article.id!)">
+                              <span class="material-icons">delete</span>
+                           </button>
+                        </td>
+                     </tr>
+                  }
+               </tbody>
+            </table>
+
+            @if (state.response.content.length === 0) {
+               <div class="feedback-container empty">
+                  Nenhum artigo encontrado para os filtros aplicados.
+               </div>
+            }
+         </div>
+
+         <div class="mn-footer">
+            <div class="mn-pagination">
+               <button
+                  (click)="changePage(state.response.number)"
+                  [disabled]="state.response.number === 0">
+                  <span class="material-icons">arrow_back</span>
+               </button>
+               <span>Página {{ state.response.number + 1 }} de {{ state.response.totalPages }}</span>
+               <button
+                  (click)="changePage(state.response.number + 2)"
+                  [disabled]="state.response.number >= state.response.totalPages - 1">
+                  <span class="material-icons">arrow_forward</span>
+               </button>
+            </div>
+            <div class="mn-page-size">
+               Mostrar
+               <select
+                  (change)="onPageSizeChange($event)"
+                  [value]="state.response.size">
+                  <option [value]="5">5</option>
+                  <option [value]="10">10</option>
+                  <option [value]="20">20</option>
+               </select>
+               por página
+            </div>
+         </div>
+      }
+   }
 </div>

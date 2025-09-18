@@ -1,5 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { AsyncPipe, DatePipe, NgOptimizedImage } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { catchError, map, Observable, of, startWith, switchMap } from 'rxjs';
@@ -17,7 +16,7 @@ import { Article } from '../../../../core/@types/Article';
 @Component({
   selector: 'app-edit-news',
   standalone: true,
-  imports: [AsyncPipe, FormsModule, NgSelectModule, DatePipe, NgOptimizedImage],
+  imports: [FormsModule, NgSelectModule, ],
   templateUrl: './edit-news.page.html',
   styleUrl: './edit-news.page.scss'
 })
@@ -45,7 +44,7 @@ export class EditNewsPage implements OnInit {
     article: Article | null;
     error: Error | null;
   }>;
-  
+
   categoryState$!: Observable<{ loading: boolean; availableCategories: Category[] | null; total: number }>;
   dropdownOpen = false;
 
@@ -59,7 +58,7 @@ export class EditNewsPage implements OnInit {
         if (!slug) {
           return of(null);
         }
-        this.slug = slug; 
+        this.slug = slug;
         return this.articleService.getArticleBySlug(slug);
       }),
       catchError(err => {
@@ -68,25 +67,25 @@ export class EditNewsPage implements OnInit {
       })
     ).subscribe(articleData => {
       if (articleData) {
-        this.article = { 
+        this.article = {
           title: articleData.title,
           subtitle: articleData.subtitle,
           content: articleData.content,
           articleStatus: articleData.articleStatus,
-          categoryName: articleData.category?.toString() || '',
+          categoryName: articleData.categoryName?.toString() || '',
           tagNames: Array.isArray(articleData.tagNames)
-          ? articleData.tagNames.map(tag => 
-              typeof tag === 'string' ? tag : tag.name
+          ? articleData.tagNames.map(tag =>
+                tag.name
             )
           : (articleData.tagNames as string)?.split(',') || []
         };
       }
     });
-  
+
     this.getAllTags();
     this.getAllCategories();
   }
-  
+
 
   getAllTags(page = 0, size = 10): void {
     this.newsState$ = this.tagService
@@ -128,13 +127,13 @@ export class EditNewsPage implements OnInit {
       this.toastService.showError('Por favor, preencha todos os campos obrigatórios.');
       return;
     }
-  
+
     const dto = {
       title: this.article.title,
       subtitle: this.article.subtitle,
       content: this.article.content,
     };
-  
+
     this.articleService.updateArticleBySlug(this.slug, dto).subscribe({
       next: () => {
         this.toastService.showSuccess('Notícia atualizada com sucesso!');
@@ -145,8 +144,8 @@ export class EditNewsPage implements OnInit {
       }
     });
   }
-  
-  
+
+
   /*onSubmit(form: NgForm): void {
     if (form.invalid) {
       this.toastService.showError('Por favor, preencha todos os campos obrigatórios.');
