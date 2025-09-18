@@ -1,0 +1,14 @@
+<div class="chart-container">
+   @if (history && history.length > 1) {
+      <canvas
+         baseChart
+         [data]="lineChartData"
+         [options]="lineChartOptions"
+         [type]="lineChartType">
+      </canvas>
+   } @else {
+      <div class="no-data-feedback">
+         <p>Dados históricos insuficientes para exibir o gráfico.</p>
+      </div>
+   }
+</div>

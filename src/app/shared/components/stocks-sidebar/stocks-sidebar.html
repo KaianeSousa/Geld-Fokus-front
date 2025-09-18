@@ -1,5 +1,28 @@
 <aside class="sidebar">
-   <app-stock-widget title="Ações" [stocks]="acoes"></app-stock-widget>
-   <app-stock-widget title="Ações mais baratas" [stocks]="acoesBaratas"></app-stock-widget>
-   <app-stock-widget title="Ações em Destaque" [stocks]="acoesDestaque"></app-stock-widget>
+   @if (featuredStocksState$ | async; as state) {
+      <app-stock-widget
+         title="Ações em destaque"
+         [stocks]="state.stocks"
+         [isLoading]="state.loading"
+         [error]="state.error">
+      </app-stock-widget>
+   }
+
+   @if (expensiveStocksState$ | async; as state) {
+      <app-stock-widget
+         title="Ações mais caras"
+         [stocks]="state.stocks"
+         [isLoading]="state.loading"
+         [error]="state.error">
+      </app-stock-widget>
+   }
+
+   @if (cheapStocksState$ | async; as state) {
+      <app-stock-widget
+         title="Ações mais baratas"
+         [stocks]="state.stocks"
+         [isLoading]="state.loading"
+         [error]="state.error">
+      </app-stock-widget>
+   }
 </aside>

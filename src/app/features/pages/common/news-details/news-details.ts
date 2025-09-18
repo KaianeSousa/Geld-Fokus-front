@@ -1,4 +1,4 @@
-import {Observable } from 'rxjs';
+import { Observable, map, tap, of, catchError, switchMap, startWith } from 'rxjs';
 import {Component, inject, } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { Article } from '../../../../core/@types/Article';
@@ -27,7 +27,7 @@ export class NewsDetails {
       error: Error | null;
    }>;
 
-  /* ngOnInit(): void {
+   ngOnInit(): void {
       this.newsState$ = this.route.paramMap.pipe(
          switchMap(params => {
             const slug = params.get('slug');
@@ -35,12 +35,18 @@ export class NewsDetails {
                return of({ loading: false, news: null, error: 'Notícia não encontrada' });
             }
 
-            return this.articleService.getNewsBySlug(slug).pipe(
+            return this.articleService.getArticleBySlug(slug).pipe(
+               tap(newsData => {
+                  if (newsData && newsData.id) {
+                     this.articleService.incrementViewCount(newsData.id.toString()).subscribe();
+                  }
+               }),
                map(newsData => ({ loading: false, news: newsData ?? null, error: null })),
                catchError(err => of({ loading: false, news: null, error: err }))
-            );
+         
+            )
          }),
          startWith({ loading: true, news: null, error: null })
       );
-   } */
+   } 
 }

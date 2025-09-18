@@ -1,20 +1,50 @@
 <div class="widget-container">
-  <h3 class="widget-title">{{ title }}</h3>
-  <div class="widget-content">
-    <div class="chart-placeholder">
-      <img src="https://i.imgur.com/algjVW2.png" alt="Gráfico de ações">
-    </div>
-    
-    <ul class="stock-list">
-      <li class="stock-item" *ngFor="let stock of stocks">
-        <span class="stock-symbol">{{ stock.symbol }}</span>
-        <div class="stock-info">
-          <span class="stock-value">{{ stock.value }}</span>
-          <span class="stock-change" [ngClass]="{'positive': stock.positive, 'negative': !stock.positive}">
-            {{ stock.change }}
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
+   <h3 class="widget-title">{{ title }}</h3>
+
+   @if (isLoading) {
+      <div class="widget-state-feedback">
+         <p>Carregando...</p>
+      </div>
+   }
+   @else if (error) {
+      <div class="widget-state-feedback error">
+         <p>Falha ao carregar as ações.</p>
+      </div>
+   }
+   @else if (stocks && stocks.length > 0) {
+      <div class="widget-content">
+         <div class="chart">
+            @if (selectedStock) {
+               <app-stock-chart
+                  [history]="selectedStock.history"
+                  [stockSymbol]="selectedStock.symbol">
+               </app-stock-chart>
+            }
+         </div>
+
+         <ul class="stock-list">
+            @for (stock of stocks; track stock.symbol) {
+               <li
+                  class="stock-item"
+                  (click)="selectStock(stock)"
+                  [class.selected]="stock.symbol === selectedStock?.symbol">
+
+                  <span class="stock-symbol">{{ stock.symbol }}</span>
+                  <div class="stock-info">
+                     <span class="stock-value">{{ stock.value }}</span>
+                     <span class="stock-change" [ngClass]="{'positive': stock.positive, 'negative': !stock.positive}">
+                {{ stock.change }}
+              </span>
+                  </div>
+               </li>
+            }
+         </ul>
+      </div>
+   }
+
+   @else {
+      <div class="widget-state-feedback">
+         <p>Nenhuma ação para exibir.</p>
+      </div>
+   }
 </div>

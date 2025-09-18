@@ -1,33 +1,52 @@
-import { Component } from '@angular/core';
-import {StockWidgetComponent} from "../stock-widget/stock-widget";
+import { Component, inject, OnInit } from '@angular/core';
+import { StockWidgetComponent } from "../stock-widget/stock-widget";
+import { Stock } from '../../../core/@types/Stock';
+import { StockService } from '../../../core/services/stock.service';
+import {map, Observable, of, startWith} from 'rxjs';
+import {Article} from '../../../core/@types/Article';
+import {catchError} from 'rxjs/operators';
+import {AsyncPipe} from '@angular/common';
+
+interface StocksState {
+   loading: boolean;
+   stocks: Stock[] | null;
+   error: Error | null;
+}
 
 @Component({
   selector: 'app-stocks-sidebar',
-    imports: [
-        StockWidgetComponent
-    ],
+   imports: [StockWidgetComponent, AsyncPipe],
   templateUrl: './stocks-sidebar.html',
   styleUrl: './stocks-sidebar.scss'
 })
-export class StocksSidebar {
+export class StocksSidebar implements OnInit {
+   expensiveStocksState$!: Observable<StocksState>;
+   cheapStocksState$!: Observable<StocksState>;
+   featuredStocksState$!: Observable<StocksState>;
 
-   acoes = [
-      {symbol: 'PETR3', value: '32,76', change: '+0.49%', positive: true},
-      {symbol: 'VALE3', value: '61,20', change: '-1.27%', positive: false},
-      {symbol: 'MGLU3', value: '1,97', change: '+2.07%', positive: true},
-      {symbol: 'ITUB4', value: '23,28', change: '-0.17%', positive: false},
-      {symbol: 'BBDC4', value: '14,48', change: '+0.21%', positive: true}
-   ];
+   private stockService = inject(StockService);
 
-   acoesBaratas = [
-      {symbol: 'COGN3', value: '2,20', change: '+1.38%', positive: true},
-      {symbol: 'IRBR3', value: '42,14', change: '-2.56%', positive: false},
-      {symbol: 'CIEL3', value: '4,78', change: '+1.49%', positive: true}
-   ];
+   ngOnInit(): void {
+      this.loadAllStocks();
+   }
 
-   acoesDestaque = [
-      {symbol: 'EMBR3', value: '21,08', change: '+3.24%', positive: true},
-      {symbol: 'AZUL4', value: '13,10', change: '-1.50%', positive: false},
-      {symbol: 'GOLL4', value: '7,79', change: '+2.50%', positive: true}
-   ]; 
+   private loadAllStocks(): void {
+      this.expensiveStocksState$ = this.stockService.getExpensiveStocks().pipe(
+         map(stocks => ({ loading: false, stocks: stocks, error: null })),
+         startWith({ loading: true, stocks: null, error: null }),
+         catchError(error => of({ loading: false, stocks: null, error: error })),
+      );
+
+      this.cheapStocksState$ = this.stockService.getCheapestStocks().pipe(
+         map(stocks => ({ loading: false, stocks: stocks, error: null })),
+         startWith({ loading: true, stocks: null, error: null }),
+         catchError(error => of({ loading: false, stocks: null, error: error }))
+      );
+
+      this.featuredStocksState$ = this.stockService.getFeaturedStocks().pipe(
+         map(stocks => ({ loading: false, stocks: stocks, error: null })),
+         startWith({ loading: true, stocks: null, error: null }),
+         catchError(error => of({ loading: false, stocks: null, error: error }))
+      );
+   }
 }
