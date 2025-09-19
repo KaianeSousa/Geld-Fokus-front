@@ -145,30 +145,6 @@ export class EditNewsPage implements OnInit {
     });
   }
 
-
-  /*onSubmit(form: NgForm): void {
-    if (form.invalid) {
-      this.toastService.showError('Por favor, preencha todos os campos obrigatórios.');
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('article', new Blob([JSON.stringify(this.article)], { type: 'application/json' }));
-    if (this.selectedFile) {
-      formData.append('picture', this.selectedFile);
-    }
-
-    this.articleService.updateArticleBySlug(this.slug, formData).subscribe({
-      next: () => {
-        this.toastService.showSuccess('Notícia atualizada com sucesso!');
-        this.router.navigate(['/manage-news']);
-      },
-      error: () => {
-        this.toastService.showError('Erro ao atualizar a notícia, tente novamente!');
-      }
-    });
-  }*/
-
   toggleDropdown(): void {
     this.dropdownOpen = !this.dropdownOpen;
   }

@@ -2,32 +2,32 @@
    <div class="mn-header">
       <h1>Gerenciar Notícias</h1>
 
-      <div class="mn-filters">
+     <!--- <div class="mn-filters">
          <input
             type="text"
             class="filter-input"
             placeholder="Buscar por título..."
-            [formControl]="searchTerm">
+            [formControl]="search">
 
          <button class="btn-clear" (click)="clearFilters()">Limpar Filtro</button>
       </div>
-   </div>
+   </div> -->
 
-   @if (state$ | async; as state) {
+   @if (articles$ | async; as page) {
 
-      @if (state.loading) {
+      @if (page === null) {
          <div class="feedback-container">
             <p>Carregando artigos...</p>
          </div>
       }
 
-      @else if (state.error) {
-         <div class="feedback-container error">
-            <p>Falha ao carregar os artigos. Tente novamente mais tarde.</p>
+      @else if (page.content.length === 0) {
+         <div class="feedback-container empty">
+            Nenhum artigo encontrado para os filtros aplicados.
          </div>
       }
 
-      @else if (state.response) {
+      @else {
          <div class="mn-table-wrap">
             <table class="mn-table">
                <thead>
@@ -42,7 +42,7 @@
                </tr>
                </thead>
                <tbody>
-                  @for (article of state.response.content; track article.id) {
+                  @for (article of page.content; track article.id) {
                      <tr>
                         <td class="col-image">
                            <img [ngSrc]="article.coverImage" [alt]="article.title" width="100" height="100" />
@@ -68,7 +68,7 @@
                            <button class="btn-icon" (click)="edit(article.slug)">
                               <span class="material-icons">edit</span>
                            </button>
-                           <button class="btn-icon danger" (click)="delete(article.id!)">
+                           <button class="btn-icon danger" (click)="delete(article.slug)">
                               <span class="material-icons">delete</span>
                            </button>
                         </td>
@@ -76,25 +76,19 @@
                   }
                </tbody>
             </table>
-
-            @if (state.response.content.length === 0) {
-               <div class="feedback-container empty">
-                  Nenhum artigo encontrado para os filtros aplicados.
-               </div>
-            }
          </div>
 
          <div class="mn-footer">
             <div class="mn-pagination">
                <button
-                  (click)="changePage(state.response.number)"
-                  [disabled]="state.response.number === 0">
+                  (click)="changePage(page.number)"
+                  [disabled]="page.number === 0">
                   <span class="material-icons">arrow_back</span>
                </button>
-               <span>Página {{ state.response.number + 1 }} de {{ state.response.totalPages }}</span>
+               <span>Página {{ page.number + 1 }} de {{ page.totalPages }}</span>
                <button
-                  (click)="changePage(state.response.number + 2)"
-                  [disabled]="state.response.number >= state.response.totalPages - 1">
+                  (click)="changePage(page.number + 2)"
+                  [disabled]="page.number >= page.totalPages - 1">
                   <span class="material-icons">arrow_forward</span>
                </button>
             </div>
@@ -102,7 +96,7 @@
                Mostrar
                <select
                   (change)="onPageSizeChange($event)"
-                  [value]="state.response.size">
+                  [value]="page.size">
                   <option [value]="5">5</option>
                   <option [value]="10">10</option>
                   <option [value]="20">20</option>
@@ -112,4 +106,14 @@
          </div>
       }
    }
+
+  <div class="modal" *ngIf="showDeleteModal">
+    <div class="modal-content">
+      <h3>Tem certeza que deseja deletar esta notícia?</h3>
+      <div class="modal-actions">
+        <button class="danger" (click)="confirmDelete()">Continuar</button>
+        <button (click)="cancelDelete()">Cancelar</button>
+      </div>
+    </div>
+  </div>
 </div>

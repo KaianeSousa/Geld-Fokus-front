@@ -21,23 +21,53 @@
         />
       </div>
 
-       <div class="input-group">
-          <label for="category">Categoria</label>
-          <select
-             id="category"
-             name="categoryName"
-             class="input-group__select"
-             [(ngModel)]="register.categoryName"
-             required
-          >
-             <option [ngValue]="" selected disabled>Selecione uma categoria</option>
-             @for (category of (categoryState$ | async)?.availableCategories || []; track category.name) {
-                <option [value]="category.name">{{ category.name }}</option>
-             }
-
-          </select>
-       </div>
-
+      <div class="input-group">
+        <label for="category">Categoria</label>
+      
+        <div
+          class="custom-select select-tags"
+          (click)="toggleCategoryDropdown()"
+          [class.open]="categoryDropdownOpen"
+          tabindex="0"
+          (keydown.enter)="toggleCategoryDropdown()"
+          (keydown.space)="toggleCategoryDropdown()"
+          (blur)="closeCategoryDropdown()"
+          role="combobox"
+          aria-haspopup="listbox"
+          [attr.aria-expanded]="categoryDropdownOpen"
+          aria-controls="category-options"
+          aria-required="true"
+        >
+          <div class="selected-tags">
+            @if(register.categoryName) {
+              <span>{{ register.categoryName }}</span>
+            } @else {
+              <span class="selected-value">Selecione uma categoria</span>
+            }
+          </div>
+          <span class="arrow">&#9662;</span>
+      
+          @if(categoryDropdownOpen) {
+            <ul class="options-list" id="category-options" role="listbox">
+              @for(category of (categoryState$ | async)?.availableCategories || []; track category.name) {
+                <li
+                  [class.selected]="register.categoryName === category.name"
+                  (click)="selectCategory(category.name, $event)"
+                  (keydown.enter)="selectCategory(category.name, $event)"
+                  (keydown.space)="selectCategory(category.name, $event)"
+                  tabindex="0"
+                  role="option"
+                  [attr.aria-selected]="register.categoryName === category.name"
+                >
+                  {{ category.name }}
+                </li>
+              }
+            </ul>
+          }
+        </div>
+        <input type="hidden" name="categoryName" [(ngModel)]="register.categoryName" required />
+      </div>
+      
       <div class="input-group">
         <label for="subtitle">Subtítulo</label>
         <input
