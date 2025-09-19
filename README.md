@@ -19,7 +19,8 @@ Plataforma de gerenciamento de notícias desenvolvida com foco em desempenho, or
 - **Banco de Dados:** MongoDB 
 - **Frontend:** Framework Angular 20  
 - **Estilos:** SCSS
-- **Estrutura de páginas:** HTML5  
+- **Estrutura de páginas:** HTML5
+  
 ---
 
 ## Requisitos
@@ -168,5 +169,6 @@ O banco de dados MongoDB é executado em container. Para iniciar digite:
 docker-compose up -d
 ```
 ---
+
 
 
