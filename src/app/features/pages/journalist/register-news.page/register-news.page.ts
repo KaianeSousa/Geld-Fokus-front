@@ -38,6 +38,7 @@ export class RegisterNewsPage implements OnInit {
    newsState$!: Observable<{ loading: boolean; availableTags: Tag[] | null; total: number }>;
    categoryState$!: Observable<{ loading: boolean; availableCategories: Category[] | null; total: number }>;
    dropdownOpen = false;
+   categoryDropdownOpen = false;
 
    ngOnInit(): void {
       this.getAllTags();
@@ -127,4 +128,19 @@ export class RegisterNewsPage implements OnInit {
       event.stopPropagation();
       this.register.tagNames = this.register.tagNames.filter(t => t !== tagName);
    }
+
+   toggleCategoryDropdown() {
+   this.categoryDropdownOpen = !this.categoryDropdownOpen;
+   }
+
+   closeCategoryDropdown() {
+   setTimeout(() => this.categoryDropdownOpen = false, 200);
+   }
+
+   selectCategory(categoryName: string, event: Event) {
+   event.stopPropagation();
+   this.register.categoryName = categoryName;
+   this.categoryDropdownOpen = false;
+   }
+
 }

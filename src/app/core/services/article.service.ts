@@ -26,13 +26,33 @@ export class ArticleService {
       dto: { title: string; subtitle: string; content: string }
    ): Observable<Article> {
       return this.http.put<Article>(`${this.endpoint}/update-article/${slug}`, dto);
-   }
+    }
+    
+    deleteArticle(slug: string): Observable<void> {
+      return this.http.delete<void>(`${this.endpoint}/delete-article/${slug}`);
+    }
 
-   deleteArticle(id: number): Observable<void> {
-      return this.http.delete<void>(`${this.endpoint}/delete-article/${id}`);
-   }
-
-   getUserArticles(authorId: string, page = 0, size = 10): Observable<Article> {
+    getPublishedArticlesForUser(
+      page: number, 
+      size: number,
+      searchTerm?: string,
+      tags?: string[],
+      author?: string,
+      category?: string
+    ): Observable<Page<Article>> {
+      let params = new HttpParams()
+        .set('page', page.toString())
+        .set('size', size.toString());
+    
+      if (searchTerm) params = params.set('search', searchTerm);
+      if (tags?.length) params = params.set('tags', tags.join(','));
+      if (author) params = params.set('author', author);
+      if (category) params = params.set('category', category);
+    
+      return this.http.get<Page<Article>>(`${this.endpoint}/get-published-for-user`, { params });
+    }
+  
+    getUserArticles(authorId: string, page = 0, size = 10): Observable<Article> {
       const params = new HttpParams()
          .set('page', page)
          .set('size', size);
@@ -68,44 +88,25 @@ export class ArticleService {
       return this.http.get<Page<Article>>(`${this.endpoint}/get-all-published`, {params});
    }
 
-   // getPublishedArticlesByAuthor(
-   //   page = 0,
-   //   size = 10,
-   //   categoryName?: string,
-   //   tags?: string[],
-   //   searchTerm?: string,
-   //   authorName?: string
-   // ): Observable<Page<Article>> {
-   //   let params = new HttpParams()
-   //     .set('page', page.toString())
-   //     .set('size', size.toString());
-   //
-   //   if (categoryName) params = params.set('category', categoryName);
-   //   if (tags?.length) params = params.set('tags', tags.join(','));
-   //   if (searchTerm) params = params.set('search', searchTerm);
-   //   if (authorName) params = params.set('author', authorName);
-   //
-   //   return this.http.get<Page<Article>>(`${this.endpoint}/get-all-published`, { params });
-   // }
-
    getPublishedArticlesByAuthor(
       page = 0,
       size = 10,
-      searchTerm?: string
-   ): Observable<Page<Article>> {
+      category?: string,
+      tags?: string[],
+      searchTerm?: string,
+      authorName?: string
+    ): Observable<Page<Article>> {
       let params = new HttpParams()
-         .set('page', page.toString())
-         .set('size', size.toString());
-
-      if (searchTerm) {
-         params = params.set('searchTerm', searchTerm);
-         return this.http.get<Page<Article>>(`${this.endpoint}/search`, {params});
-      }
-      else {
-         return this.http.get<Page<Article>>(`${this.endpoint}/get-all-published`, {params});
-      }
-   }
-
+        .set('page', page.toString())
+        .set('size', size.toString());
+    
+      if (category) params = params.set('category', category);
+      if (tags?.length) params = params.set('tags', tags.join(','));
+      if (searchTerm) params = params.set('search', searchTerm);
+      if (authorName) params = params.set('author', authorName);
+    
+      return this.http.get<Page<Article>>(`${this.endpoint}/get-all-published`, { params });
+    }
 
    getArticlesByCategory(category: string, page = 0, size = 10): Observable<Page<Article>> {
       const params = new HttpParams()
