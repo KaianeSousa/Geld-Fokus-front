@@ -164,11 +164,17 @@ Compilar e executar o projeto Angular localmente, abrindo no navegador:
 ng s -o
 ```
 
+Caso não queria abrir diretamente no navegador, basta remover o `-o` do final:
+```bash
+ng s
+```
+
 O banco de dados MongoDB é executado em container. Para iniciar digite:  
 ```bash
 docker-compose up -d
 ```
 ---
+
 
 
 
