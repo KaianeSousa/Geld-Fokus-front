@@ -84,11 +84,61 @@ src/
  └── styles.scss
 ```
 
+### Backend
+
+```bash
+└── src
+    └── main
+        ├── kotlin
+        │   └── douglas
+        │       └── cms_news_backend
+        │           ├── CmsNewsBackendApplication.kt
+        │           ├── config
+        │           │   ├── CloudinaryConfig.kt
+        │           │   ├── cors
+        │           │   ├── rest
+        │           │   └── security
+        │           ├── controller
+        │           ├── dto
+        │           ├── exception
+        │           │   ├── global
+        │           │   └── local
+        │           ├── initializer
+        │           ├── mapper
+        │           ├── model
+        │           ├── repository
+        │           ├── service
+        │           └── utils
+        └── resources
+    └── test
+        └── kotlin
+            └── douglas
+                └── cms_news_backend
+├── .env
+├── build.gradle
+├── docker-compose.yml
+├── Dockerfile
+├── gradle
+├── gradle.properties
+├── gradlew
+├── gradlew.bat
+├── settings.gradle
+```
 ## Configuração e Execução
+
+Instalar as dependências do projeto listadas no `package.json`
+```bash
+npm install
+```
+Compilar e executar o projeto Angular localmente, abrindo no navegador.
+```bash
+ng s -o
+```
 
 ### Banco de Dados
 O banco de dados MongoDB é executado em container. Para iniciar:  
 ```bash
 docker-compose up -d
 ```
+
 
