@@ -7,12 +7,12 @@ Plataforma de gerenciamento de notícias desenvolvida com foco em desempenho, or
 - O sistema permite que o usuário comum navegue pelas notícias e as leia.
 - Jornalista e editor podem adicionar e gerenciar notícias.
 
----
+
 ## Regras de Negócio
 - O editor pode gerenciar as notícias de todos os jornalistas.
 - Um jornalista pode gerenciar apenas as suas notícas.
 
----
+
 ## Tecnologias Utilizadas
 
 - **Backend:** Kotlin com Spring Boot  
@@ -20,8 +20,7 @@ Plataforma de gerenciamento de notícias desenvolvida com foco em desempenho, or
 - **Frontend:** Framework Angular 20  
 - **Estilos:** SCSS
 - **Estrutura de páginas:** HTML5
-  
----
+
 
 ## Requisitos
 
@@ -149,7 +148,6 @@ Para execução do projeto, é necessário ter instalados no ambiente de desenvo
    ├── gradlew.bat
    ├── settings.gradle
 ```
----
 
 ## Configuração e Execução
 **Certifique-se de ter instalado todas as tecnologias citadas anteriormente**
@@ -173,7 +171,7 @@ O banco de dados MongoDB é executado em container. Para iniciar digite:
 ```bash
 docker-compose up -d
 ```
----
+
 
 
 
