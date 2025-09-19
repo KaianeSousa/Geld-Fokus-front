@@ -17,7 +17,72 @@ Para execução do projeto, é necessário ter instalados no ambiente de desenvo
 
 - [Node.js](https://nodejs.org/)  
 - [Angular CLI](https://angular.io/cli)
-- [Docker](https://www.docker.com/)  
+- [Docker](https://www.docker.com/)
+
+## Estrutura do projeto
+### Frontend
+```bash
+src/
+ └── app/
+     ├── core/
+     │   ├── @types/
+     │   │   ├── Article
+     │   │   ├── Category
+     │   │   ├── Pagination
+     │   │   ├── Stock
+     │   │   ├── Tag
+     │   │   ├── Toast
+     │   │   ├── User
+     │   │   └── UserRegister
+     │   ├── enumeration
+     │   ├── guards
+     │   ├── interceptors
+     │   └── services
+     │
+     ├── features/
+     │   ├── layouts/
+     │   │   ├── default-layout
+     │   │   └── empty-layout
+     │   └── pages/
+     │       ├── authentication
+     │       ├── common
+     │       ├── editor
+     │       ├── journalist
+     │       └── visitor
+     │
+     ├── shared/
+     │   ├── components/
+     │   │   ├── footer
+     │   │   ├── manage-navbar
+     │   │   ├── navbar
+     │   │   ├── news-card
+     │   │   ├── news-carousel
+     │   │   ├── search-news
+     │   │   ├── stock-chart
+     │   │   ├── stock-widget
+     │   │   ├── stocks-sidebar
+     │   │   ├── tab
+     │   │   ├── title-section
+     │   │   ├── toast
+     │   │   ├── toast-container
+     │   │   └── user-menu.component
+     │   └── sections/
+     │       ├── all-news-section
+     │       ├── comments-section
+     │       └── latest-news-section
+     │
+     ├── app.config.ts
+     ├── app.html
+     ├── app.routes.ts
+     ├── app.scss
+     └── app.ts
+ │
+ ├── assets/
+ ├── _mixins.scss
+ ├── index.html
+ ├── main.ts
+ └── styles.scss
+```
 
 ## Configuração e Execução
 
@@ -26,3 +91,4 @@ O banco de dados MongoDB é executado em container. Para iniciar:
 ```bash
 docker-compose up -d
 ```
+
